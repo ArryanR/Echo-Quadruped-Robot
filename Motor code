@@ -1,1 +1,136 @@
+#include <Servo.h>
+
+// hip servos
+Servo hipFL;
+Servo hipFR;
+Servo hipBL;
+Servo hipBR;
+
+// knee servos (two for leg because of design)
+Servo kneeFL_A;
+Servo kneeFL_B;
+
+Servo kneeFR_A;
+Servo kneeFR_B;
+
+Servo kneeBL_A;
+Servo kneeBL_B;
+
+Servo kneeBR_A;
+Servo kneeBR_B;
+
+// tuning values
+int hipCenter  = 90;
+int hipForward = 115;
+int hipBack    = 65;
+
+int kneeUp   = 30;
+int kneeDown = 0;
+
+int pos;
+
+// what pins go with what motors?
+void setup() {
+
+  // hips
+  hipFL.attach(2);
+  hipFR.attach(3);
+  hipBL.attach(4);
+  hipBR.attach(5);
+
+  // knees
+  kneeFL_A.attach(6);
+  kneeFL_B.attach(7);
+
+  kneeFR_A.attach(8);
+  kneeFR_B.attach(9);
+
+  kneeBL_A.attach(10);
+  kneeBL_B.attach(11);
+
+  kneeBR_A.attach(12);
+  kneeBR_B.attach(13);
+
+  // neutral
+  hipFL.write(hipCenter);
+  hipFR.write(hipCenter);
+  hipBL.write(hipCenter);
+  hipBR.write(hipCenter);
+
+  kneeFL_A.write(kneeDown);
+  kneeFL_B.write(180 - kneeDown);
+
+  kneeFR_A.write(kneeDown);
+  kneeFR_B.write(180 - kneeDown);
+
+  kneeBL_A.write(kneeDown);
+  kneeBL_B.write(180 - kneeDown);
+
+  kneeBR_A.write(kneeDown);
+  kneeBR_B.write(180 - kneeDown);
+}
+
+
+void loop() {
+
+  //fl + br (front left + back right(they are coded the same))
+  for (pos = kneeDown; pos <= kneeUp; pos++) {
+    kneeFL_A.write(pos);
+    kneeFL_B.write(180 - pos);
+    kneeBR_A.write(pos);
+    kneeBR_B.write(180 - pos);
+    delay(15);
+  }
+
+  hipFL.write(hipForward);
+  hipBR.write(hipBack);
+  delay(150);
+
+  for (pos = kneeUp; pos >= kneeDown; pos--) {
+    kneeFL_A.write(pos);
+    kneeFL_B.write(180 - pos);
+    kneeBR_A.write(pos);
+    kneeBR_B.write(180 - pos);
+    delay(15);
+  }
+
+  // reset hips
+  hipFL.write(hipCenter);
+  hipBR.write(hipCenter);
+  delay(120);
+
+
+  // fr + bl (front right + back left(diagonal legs are the same))
+  for (pos = kneeDown; pos <= kneeUp; pos++) {
+    kneeFR_A.write(pos);
+    kneeFR_B.write(180 - pos);
+    kneeBL_A.write(pos);
+    kneeBL_B.write(180 - pos);
+    delay(15);
+  }
+
+  hipFR.write(hipForward);
+  hipBL.write(hipBack);
+  delay(150);
+
+  for (pos = kneeUp; pos >= kneeDown; pos--) {
+    kneeFR_A.write(pos);
+    kneeFR_B.write(180 - pos);
+    kneeBL_A.write(pos);
+    kneeBL_B.write(180 - pos);
+    delay(15);
+  }
+
+  // reset hips
+  hipFR.write(hipCenter);
+  hipBL.write(hipCenter);
+  delay(120);
+  // FINISHED!!
+  /*
+  by the way, I've just started this project, so this code only makes it walk.
+  also, the hips rotate at 90deg when they start because I havent simulated 
+  my work to find an optimal angle for the hip to start as
+  */
+}
+
 
