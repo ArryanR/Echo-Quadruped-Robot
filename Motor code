@@ -20,9 +20,10 @@ Servo kneeBR_A;
 Servo kneeBR_B;
 
 // tuning values
-int hipCenter  = 90;
-int hipForward = 115;
-int hipBack    = 65;
+int hipCenter  = 60;
+int hipForward = 70;
+int hipBack    = 50;
+
 
 int kneeUp   = 30;
 int kneeDown = 0;
@@ -82,9 +83,12 @@ void loop() {
     delay(15);
   }
 
-  hipFL.write(hipForward);
-  hipBR.write(hipBack);
-  delay(150);
+  // smooth hip movement
+  for (int h = hipCenter; h <= hipForward; h++) {
+    hipFL.write(h);
+    hipBR.write(hipBack + (hipCenter - h));
+    delay(10);
+  }
 
   for (pos = kneeUp; pos >= kneeDown; pos--) {
     kneeFL_A.write(pos);
@@ -95,8 +99,11 @@ void loop() {
   }
 
   // reset hips
-  hipFL.write(hipCenter);
-  hipBR.write(hipCenter);
+  for (int h = hipForward; h >= hipCenter; h--) {
+    hipFL.write(h);
+    hipBR.write(hipBack + (hipCenter - h));
+    delay(10);
+  }
   delay(120);
 
 
@@ -109,9 +116,12 @@ void loop() {
     delay(15);
   }
 
-  hipFR.write(hipForward);
-  hipBL.write(hipBack);
-  delay(150);
+  // smooth hip movement
+  for (int h = hipCenter; h <= hipForward; h++) {
+    hipFR.write(h);
+    hipBL.write(hipBack + (hipCenter - h));
+    delay(10);
+  }
 
   for (pos = kneeUp; pos >= kneeDown; pos--) {
     kneeFR_A.write(pos);
@@ -122,8 +132,12 @@ void loop() {
   }
 
   // reset hips
-  hipFR.write(hipCenter);
-  hipBL.write(hipCenter);
+  // smooth reset
+  for (int h = hipForward; h >= hipCenter; h--) {
+    hipFR.write(h);
+    hipBL.write(hipBack + (hipCenter - h));
+    delay(10);
+  }
   delay(120);
   // FINISHED!!
   /*
@@ -132,5 +146,6 @@ void loop() {
   my work to find an optimal angle for the hip to start as
   */
 }
+
 
 
