@@ -20,17 +20,24 @@ Servo kneeBR_A;
 Servo kneeBR_B;
 
 // tuning values
-int hipCenter  = 60;
+int hipCenter  = 40;
 int hipForward = 70;
 int hipBack    = 50;
-
 
 int kneeUp   = 30;
 int kneeDown = 0;
 
+// knee direction multipliers
+// change these if a knee bends the wrong way
+int kneeFL_dir = 1;
+int kneeFR_dir = 1;
+int kneeBL_dir = 1;
+int kneeBR_dir = 1;
+
 int pos;
 
 // what pins go with what motors?
+
 void setup() {
 
   // hips
@@ -52,12 +59,14 @@ void setup() {
   kneeBR_A.attach(12);
   kneeBR_B.attach(13);
 
-  // neutral
+  // neutral position
+  
   hipFL.write(hipCenter);
   hipFR.write(hipCenter);
   hipBL.write(hipCenter);
   hipBR.write(hipCenter);
 
+  // knees start down
   kneeFL_A.write(kneeDown);
   kneeFL_B.write(180 - kneeDown);
 
@@ -71,10 +80,18 @@ void setup() {
   kneeBR_B.write(180 - kneeDown);
 }
 
-
 void loop() {
 
-  //fl + br (front left + back right(they are coded the same))
+  // fl + br (front left + back right)
+
+  // smooth hip movement 
+  for (int h = hipCenter; h <= hipForward; h++) {
+    hipFL.write(h);
+    hipBR.write(hipCenter - (h - hipCenter)); // mirrored
+    delay(10);
+  }
+
+  // lift knees
   for (pos = kneeDown; pos <= kneeUp; pos++) {
     kneeFL_A.write(pos);
     kneeFL_B.write(180 - pos);
@@ -83,13 +100,7 @@ void loop() {
     delay(15);
   }
 
-  // smooth hip movement
-  for (int h = hipCenter; h <= hipForward; h++) {
-    hipFL.write(h);
-    hipBR.write(hipBack + (hipCenter - h));
-    delay(10);
-  }
-
+  // lower knees
   for (pos = kneeUp; pos >= kneeDown; pos--) {
     kneeFL_A.write(pos);
     kneeFL_B.write(180 - pos);
@@ -101,13 +112,21 @@ void loop() {
   // reset hips
   for (int h = hipForward; h >= hipCenter; h--) {
     hipFL.write(h);
-    hipBR.write(hipBack + (hipCenter - h));
+    hipBR.write(hipCenter - (h - hipCenter));
     delay(10);
   }
   delay(120);
+  
+  // fr + bl (front right + back left)
 
+  // smooth hip movement 
+  for (int h = hipCenter; h <= hipForward; h++) {
+    hipFR.write(h);
+    hipBL.write(hipCenter - (h - hipCenter)); // mirrored
+    delay(10);
+  }
 
-  // fr + bl (front right + back left(diagonal legs are the same))
+  // lift knees
   for (pos = kneeDown; pos <= kneeUp; pos++) {
     kneeFR_A.write(pos);
     kneeFR_B.write(180 - pos);
@@ -116,13 +135,7 @@ void loop() {
     delay(15);
   }
 
-  // smooth hip movement
-  for (int h = hipCenter; h <= hipForward; h++) {
-    hipFR.write(h);
-    hipBL.write(hipBack + (hipCenter - h));
-    delay(10);
-  }
-
+  // lower knees
   for (pos = kneeUp; pos >= kneeDown; pos--) {
     kneeFR_A.write(pos);
     kneeFR_B.write(180 - pos);
@@ -132,20 +145,17 @@ void loop() {
   }
 
   // reset hips
-  // smooth reset
   for (int h = hipForward; h >= hipCenter; h--) {
     hipFR.write(h);
-    hipBL.write(hipBack + (hipCenter - h));
+    hipBL.write(hipCenter - (h - hipCenter));
     delay(10);
   }
   delay(120);
+
   // FINISHED!!
-  /*
-  by the way, I've just started this project, so this code only makes it walk.
-  also, the hips rotate at 90deg when they start because I havent simulated 
-  my work to find an optimal angle for the hip to start as
-  */
+
 }
+
 
 
 
