@@ -5,3 +5,4 @@ This is a project that I've just started to get me into engineering. I've always
 
 I have also designed a new leg, and this has marked a new version of the dog. Here it is:
 https://github.com/ArryanR/Robot-dog/blob/main/new_leg_design.stl
+It is called v2.0 because of the significant changes that have occured.
