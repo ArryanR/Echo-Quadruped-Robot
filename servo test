@@ -1,6 +1,3 @@
-I did this to learn how to control servos with Arduino.
-It also had an ultrasonic distance sensor and a solar panel.
-
 
 #include <Servo.h>
 
