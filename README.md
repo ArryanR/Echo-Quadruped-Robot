@@ -4,3 +4,4 @@ This is a project that I've just started to get me into engineering. I've always
 <img width="491" height="359" alt="image" src="https://github.com/user-attachments/assets/1a7a1125-b5ea-4877-a366-7d12773c4941" />
 
 I have also designed a new leg, and this has marked a new version of the dog. Here it is:
+https://github.com/ArryanR/Robot-dog/blob/main/new_leg_design.stl
