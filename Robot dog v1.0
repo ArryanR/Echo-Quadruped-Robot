@@ -1,6 +1,7 @@
-<p> My robot dog was first created in a browser-based software called TinkerCAD. It provided basic support and I started my project on it because of its user-friendly capabilities. </p>
-<p>Here is a public view link:
-https://www.tinkercad.com/things/75EoaUac4LI-robot-dog. </p>
-<p> It featured servos, a screen, an ultrasonic distance sensor, and a ESP32 camera module. </p>
-<p> At the time, coding it was a little hard for me, as I wasn't familiar with using an arduino to code, however, in my opinion, it was a pivotal starting point for me. </p>
+<p align="center" style="font-size: 32px; font-weight: bold;">🐶 Robot Dog Project</p>
+<p style="font-size: 18px; line-height: 1.6;">
+My robot dog was first created in a browser‑based software called
+<span style="color:#4CAF50; font-weight:bold;">TinkerCAD</span>.
+It provided basic support, and I started my project there because of its user‑friendly capabilities.
+</p>
 
