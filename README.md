@@ -22,4 +22,4 @@ This was also designed in TinkerCAD.
 
 <img width="334" height="315" alt="image" src="https://github.com/user-attachments/assets/5c4495cf-92a4-45c8-8eaa-cd4a8673b8fa" />
 
-** More information can be found in the respective files**
+###### More information can be found in the respective files
