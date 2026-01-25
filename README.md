@@ -19,3 +19,7 @@ This was designed in TinkerCAD. More details can be found in the designated file
 This was also designed in TinkerCAD.
 
 *An image of v2.0, now designed in Fusion:*
+
+<img width="334" height="315" alt="image" src="https://github.com/user-attachments/assets/5c4495cf-92a4-45c8-8eaa-cd4a8673b8fa" />
+
+** More information can be found in the respective files**
