@@ -14,7 +14,7 @@ This was designed in TinkerCAD. More details can be found in the designated file
 
 *Here is an image of v1.1*
 
-<img width="222" height="176" alt="image" src="https://github.com/user-attachments/assets/c8306005-2d71-4af2-88a1-2d482fb44b7c" />
+<img width="813" height="579" alt="image" src="https://github.com/user-attachments/assets/c8306005-2d71-4af2-88a1-2d482fb44b7c" />
 
 This was also designed in TinkerCAD.
 
