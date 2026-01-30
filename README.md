@@ -1,12 +1,13 @@
 # Echo - Quadruped Robot
 
 This is a quadruped robot that I developed when introducing myself to engineering.
-I have started to design and code it. Currently, I am at v2.0 
+I have started to design and code it. Currently, I am at v2.0.
 
 I have yet to implement Inverse Kinematics, Computer Vision and a robotic arm.
 
 My latest model:
 
+<img width="991" height="715" alt="image" src="https://github.com/user-attachments/assets/2763d8ca-f00c-4455-8947-70f0ec24beff" />
 
 
 
