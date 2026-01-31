@@ -24,8 +24,8 @@ float HipAmplitude = 15.0;    // degrees
 // Function prototype
 void moveLeg(Servo &hip, Servo &knee, float phase);
 
-void setup() { // attach servos to pins and make them go to var Hip Center
-  FrontRightOut.attach(1); // basically just a setup for the code to come
+void setup() { // attach servos to pins and make them go to Hip Center
+  FrontRightOut.attach(1); // basically just a setup for the code to come (read the above comment)
   FrontLeftOut.attach(2);
   BackRightOut.attach(3);
   BackLeftOut.attach(4);
@@ -57,9 +57,9 @@ void setup() { // attach servos to pins and make them go to var Hip Center
 }
 
 void loop() {
-  unsigned long currentTime = millis();
+  unsigned long currentTime = millis(); // millis() now instead of delay()
 
-  float t = fmod(currentTime, CycleTime) / CycleTime; // t makes it repeat
+  float t = fmod(currentTime, CycleTime) / CycleTime; // variable t makes it repeat
 
   float phaseFR = t;
   float phaseBL = t;
@@ -82,12 +82,12 @@ void moveLeg(Servo &hip, Servo &knee, float phase) {
   } else {
     float swingPhase = (phase - 0.5) / 0.5;
     hipPos = HipCenter + HipAmplitude * swingPhase;
-    kneePos = HipCenter - StepHeight * sin(PI * swingPhase);
+    kneePos = HipCenter - StepHeight * sin(PI * swingPhase); // sin makes it run smoothly
   }
 
   hip.write(hipPos);
   knee.write(kneePos);
   /* finished with 90 lines of code!! 
-  who knew this could be made is that short amount!!
+  Who knew this could be made in such a short amount of time!!
   */
 }
