@@ -7,15 +7,15 @@ Servo FLHip, FLKnee;
 Servo BRHip, BRKnee;
 Servo BLHip, BLKnee;
 
-// The center position for my servos ( 90 degrees)
+// The center position for your servos (usually 90 degrees)
 const int HipCenter = 90;
 const int KneeCenter = 90;
 
-// leg height
-const float L1 = 103.286; // Upper leg length
-const float L2 = 125.789; // Lower leg length
+//geometry setup
+const float L1 = 110.0; // Upper leg length didnt measure for both yet
+const float L2 = 110.0; // Lower leg length
 
-// parameters
+// gait parameters
 const unsigned long CycleTime = 2000; // Time for one full step cycle in ms
 const float StepLength = 60.0;        // Horizontal travel
 const float StepLift = 40.0;          // Vertical lift height
@@ -27,8 +27,10 @@ void legIK(float x, float z, float &hipDeg, float &kneeDeg) {
   float r = sqrt(x * x + z * z);
 
   // Law of Cosines for the Knee Angle
+  // cos(theta) = (r^2 - L1^2 - L2^2) / 2*L1*L2
   float cosKnee = (r * r - L1 * L1 - L2 * L2) / (2.0 * L1 * L2);
 
+  // Constrain to avoid math errors
   cosKnee = constrain(cosKnee, -1.0, 1.0);
 
   float kneeRad = acos(cosKnee);
@@ -67,14 +69,17 @@ void moveLeg(Servo &hip, Servo &knee, float phase, bool invertX = false) {
 
   float hipA, kneeA;
   legIK(x, z, hipA, kneeA);
-  
+
+  // In many simulations, knees and hips might need inverted logic
+  // Adjust the addition/subtraction based on your sim's coordinate system
   hip.write(constrain(HipCenter + (int)hipA, 0, 180));
   knee.write(constrain(KneeCenter + (int)kneeA, 0, 180));
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(115200); // initialise communication
 
+  // reset pins because of simulator
   FRHip.attach(2);
   FRKnee.attach(3);
   FLHip.attach(4);
@@ -83,16 +88,15 @@ void setup() {
   BRKnee.attach(7);
   BLHip.attach(8);
   BLKnee.attach(9);
-
 }
 
 void loop() {
-  // Get global cycle time (0.0 to 1.0) (phases basically)
+  // Get global cycle time (0.0 to 1.0) (phases essentially, it was said before.)
   // Using float division to ensure precision in the sim loop
   unsigned long currentTime = millis();
   float t = (float)(currentTime % CycleTime) / (float)CycleTime;
 
-  // trot gait and phases
+  // Diagonal pairs for a Trot Gait
   float phaseFR = t;
   float phaseBL = t;
 
@@ -102,15 +106,12 @@ void loop() {
   float phaseBR = t + 0.5;
   if (phaseBR >= 1.0) phaseBR -= 1.0;
 
-  // do movements for all 4 legs
+  // Execute movements for all 4 legs
   moveLeg(FRHip, FRKnee, phaseFR);
   moveLeg(BLHip, BLKnee, phaseBL);
   moveLeg(FLHip, FLKnee, phaseFL);
   moveLeg(BRHip, BRKnee, phaseBR);
 
-  // delay step
+  // Simulation step delay
   delay(20);
 }
-
-// lots of preparation for a small loop haha
-// wires are kind of all over the place in my sim though
