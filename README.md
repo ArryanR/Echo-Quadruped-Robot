@@ -44,3 +44,14 @@ Orthographic views:
 <img width="875" height="438" alt="image" src="https://github.com/user-attachments/assets/c0cc4e8c-5990-44f6-b19b-b6e4109ae27b" />
 
 
+
+
+
+
+
+
+
+
+
+Lengths are in millimeters (mm)
+
