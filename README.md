@@ -5,7 +5,15 @@ I have started to design and code it. Currently, I am at v2.0.
 
 I have yet to implement Inverse Kinematics, Computer Vision and a robotic arm.
 
-My latest model:
+v2.1 image:
+
+<img width="751" height="589" alt="image" src="https://github.com/user-attachments/assets/a7092968-e3dd-4cb1-be82-45581911e995" />
+
+
+
+
+
+v2.0:
 
 <img width="991" height="715" alt="image" src="https://github.com/user-attachments/assets/2763d8ca-f00c-4455-8947-70f0ec24beff" />
 
