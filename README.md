@@ -3,7 +3,7 @@
 This is a quadruped robot that I developed when introducing myself to engineering.
 I have started to design and code it. Currently, I am at v2.0.
 
-I have yet to implement Inverse Kinematics, Computer Vision and a robotic arm.
+I have yet to implement Computer Vision and a robotic arm.
 
 v2.1 image:
 
