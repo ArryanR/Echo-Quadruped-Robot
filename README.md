@@ -5,6 +5,12 @@ I have started to design and code it. Currently, I am at v2.0.
 
 I have yet to implement Computer Vision and a robotic arm.
 
+
+V2.2 - larger legs
+<img width="827" height="656" alt="image" src="https://github.com/user-attachments/assets/26f90069-e9f2-4827-9ca4-0fa82fcb0d7c" />
+
+
+
 v2.1 image:
 
 <img width="751" height="589" alt="image" src="https://github.com/user-attachments/assets/a7092968-e3dd-4cb1-be82-45581911e995" />
