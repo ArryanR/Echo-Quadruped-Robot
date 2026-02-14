@@ -7,27 +7,25 @@ Servo FLHip, FLKnee;
 Servo BRHip, BRKnee;
 Servo BLHip, BLKnee;
 
-// The center position for your servos (usually 90 degrees)
+// The center position for my servos (usually 90 degrees)
 const int HipCenter = 90;
-const int KneeCenter = 90;
+const int KneeCenter = 80;
 
-//geometry setup
-const float L1 = 110.0; // Upper leg length didnt measure for both yet
-const float L2 = 110.0; // Lower leg length
+// Geometry setup
+const float L1 = 151.767; // Upper leg length
+const float L2 = 186.055; // Lower leg length
 
-// gait parameters
+// Gait parameters
 const unsigned long CycleTime = 2000; // Time for one full step cycle in ms
 const float StepLength = 60.0;        // Horizontal travel
 const float StepLift = 40.0;          // Vertical lift height
-const float StandHeight = -160.0;     // Total neutral height (must be < L1+L2)
-
+const float StandHeight = -320.0;     // Total neutral height (must be < than L1+L2)
 
 void legIK(float x, float z, float &hipDeg, float &kneeDeg) {
   // Distance from hip to foot
   float r = sqrt(x * x + z * z);
 
   // Law of Cosines for the Knee Angle
-  // cos(theta) = (r^2 - L1^2 - L2^2) / 2*L1*L2
   float cosKnee = (r * r - L1 * L1 - L2 * L2) / (2.0 * L1 * L2);
 
   // Constrain to avoid math errors
@@ -37,69 +35,111 @@ void legIK(float x, float z, float &hipDeg, float &kneeDeg) {
 
   // Angle of the vector (x, z)
   float alpha = atan2(z, x);
+  
   // Interior angle between L1 and r
   float beta = atan2(L2 * sin(kneeRad), L1 + L2 * cos(kneeRad));
 
   float hipRad = alpha + beta; 
 
   hipDeg = hipRad * 180.0 / PI;
-  kneeDeg = kneeRad * 180.0 / PI;
+  kneeDeg = -kneeRad * 180.0 / PI;
+  
+  // the minus tells the computer that it is inverse legs
 }
 
-/**
- * Calculates leg position based on gait phase (0.0 to 1.0)
- */
+// Calculates leg position based on gait phase (0.0 to 1.0)
 void moveLeg(Servo &hip, Servo &knee, float phase, bool invertX = false) {
-  float x, z;
+  float xHip, zHip;
+  float xKnee, zKnee;
 
-  // Trot Gait logic: 0.0-0.5 is Stance (ground), 0.5-1.0 is Swing (air)
+  // --- HIP POSITION (Current Phase) ---
   if (phase < 0.5) {
-    // Stance phase: move backward linearly
     float p = phase / 0.5;
-    x = StepLength * (0.5 - p);
-    z = StandHeight;
+    xHip = StepLength * (0.5 - p);
+    zHip = StandHeight;
   } else {
-    // Swing phase: move forward in an arc
     float s = (phase - 0.5) / 0.5;
-    x = StepLength * (s - 0.5);
-    z = StandHeight + StepLift * sin(PI * s);
+    xHip = StepLength * (s - 0.5);
+    zHip = StandHeight + StepLift * sin(PI * s);
   }
 
-  if (invertX) x = -x;
+  // --- KNEE POSITION (Phase offset by 20ms) ---
+  // 20ms / 2000ms = 0.01 phase shift
+  float kneePhase = phase - 0.01; 
+  if (kneePhase < 0) kneePhase += 1.0;
 
-  float hipA, kneeA;
-  legIK(x, z, hipA, kneeA);
+  if (kneePhase < 0.5) {
+    float p = kneePhase / 0.5;
+    xKnee = StepLength * (0.5 - p);
+    zKnee = StandHeight;
+  } else {
+    float s = (kneePhase - 0.5) / 0.5;
+    xKnee = StepLength * (s - 0.5);
+    zKnee = StandHeight + StepLift * sin(PI * s);
+  }
 
-  // In many simulations, knees and hips might need inverted logic
-  // Adjust the addition/subtraction based on your sim's coordinate system
-  hip.write(constrain(HipCenter + (int)hipA, 0, 180));
-  knee.write(constrain(KneeCenter + (int)kneeA, 0, 180));
+  if (invertX) {
+    xHip = -xHip;
+    xKnee = -xKnee;
+  }
+
+  float hipAngle, kneeAngle_trash;
+  float hipAngle_trash, kneeAngle;
+
+  // Calculate separate targets
+  legIK(xHip, zHip, hipAngle, kneeAngle_trash);
+  legIK(xKnee, zKnee, hipAngle_trash, kneeAngle);
+
+  // Update servos
+  hip.write(constrain(HipCenter + (int)hipAngle, 0, 180));
+  knee.write(constrain(KneeCenter + (int)kneeAngle, 0, 180));
 }
 
 void setup() {
   Serial.begin(115200); // initialise communication
 
-  // reset pins because of simulator
+  // Calculate neutral position
+  float startHipAngle, startKneeAngle;
+  legIK(0, StandHeight, startHipAngle, startKneeAngle);
+  
+  int initHipPos = constrain(HipCenter + (int)startHipAngle, 0, 180);
+  int initKneePos = constrain(KneeCenter + (int)startKneeAngle, 0, 180);
+
+  // Write positions before attaching so they don't snap
+  FRHip.write(initHipPos);
+  FLHip.write(initHipPos);
+  BRHip.write(initHipPos);
+  BLHip.write(initHipPos);
+
+  FRKnee.write(initKneePos);
+  FLKnee.write(initKneePos);
+  BRKnee.write(initKneePos);
+  BLKnee.write(initKneePos);
+
+  // Attach Hips first
   FRHip.attach(2);
-  FRKnee.attach(3);
   FLHip.attach(4);
-  FLKnee.attach(5);
   BRHip.attach(6);
-  BRKnee.attach(7);
   BLHip.attach(8);
+
+  delay(500); // Wait for hips to initialize
+
+  // Then Knees
+  FRKnee.attach(3);
+  FLKnee.attach(5);
+  BRKnee.attach(7);
   BLKnee.attach(9);
 }
 
 void loop() {
-  // Get global cycle time (0.0 to 1.0) (phases essentially, it was said before.)
-  // Using float division to ensure precision in the sim loop
+  // Get global cycle time (0.0 to 1.0)
   unsigned long currentTime = millis();
   float t = (float)(currentTime % CycleTime) / (float)CycleTime;
 
   // Diagonal pairs for a Trot Gait
   float phaseFR = t;
   float phaseBL = t;
-
+  
   float phaseFL = t + 0.5;
   if (phaseFL >= 1.0) phaseFL -= 1.0;
 
@@ -112,6 +152,6 @@ void loop() {
   moveLeg(FLHip, FLKnee, phaseFL);
   moveLeg(BRHip, BRKnee, phaseBR);
 
-  // Simulation step delay
-  delay(20);
+  // High frequency update for smoothness
+  delay(10);
 }
