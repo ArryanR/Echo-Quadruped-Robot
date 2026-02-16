@@ -1,4 +1,4 @@
-##Robot Dog Project
+## Robot Dog Project
 
 My robot dog was first created in a browser‑based software called TinkerCAD.  
 It provided basic support, and I started my project there because of its user‑friendly capabilities.
