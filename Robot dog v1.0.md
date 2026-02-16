@@ -1,12 +1,12 @@
-## 🐶 Robot Dog Project
+##Robot Dog Project
 
-My robot dog was first created in a browser‑based software called **TinkerCAD**.  
+My robot dog was first created in a browser‑based software called TinkerCAD.  
 It provided basic support, and I started my project there because of its user‑friendly capabilities.
 
-### 🔗 TinkerCAD Model  
+TinkerCAD Model  
 https://www.tinkercad.com/things/75EoaUac4LI-robot-dog
 
-### ⚙️ Features
+Features
 - Servo motors  
 - Display screen  
 - Ultrasonic distance sensor  
