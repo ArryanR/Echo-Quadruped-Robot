@@ -1,9 +1,14 @@
 # Echo - Quadruped Robot
 
-This is a quadruped robot that I developed when introducing myself to engineering.
-I have started to design and code it. Currently, I am at v2.0.
+This is a quadruped robot that I developed when I introduced myself to engineering, specifically the process of designing and programming. Currently, I am at v3.
 
-I have yet to implement Computer Vision and a robotic arm.
+I have yet to implement Computer Vision and a robotic arm, but I am currently trying to do so.
+
+v3 - Largest Improvement
+<img width="691" height="507" alt="image" src="https://github.com/user-attachments/assets/e0689174-d517-451e-920b-8c29d5e02934" />
+
+
+
 
 
 V2.2 - larger legs
