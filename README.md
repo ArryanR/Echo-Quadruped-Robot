@@ -4,8 +4,15 @@ This is a quadruped robot that I developed when I introduced myself to engineeri
 
 I have yet to implement Computer Vision and a robotic arm, but I am currently trying to do so.
 
-v3 - Largest Improvement
-<img width="691" height="507" alt="image" src="https://github.com/user-attachments/assets/e0689174-d517-451e-920b-8c29d5e02934" />
+v3 - Largest Change
+
+Closed Compartment:
+<img width="930" height="665" alt="image" src="https://github.com/user-attachments/assets/402759db-0949-49c6-a806-f2ed15a6ffbf" />
+
+
+Open Compartment:
+<img width="872" height="635" alt="image" src="https://github.com/user-attachments/assets/566486e6-3df9-4aa9-9d81-8fa4873cf075" />
+
 
 
 
