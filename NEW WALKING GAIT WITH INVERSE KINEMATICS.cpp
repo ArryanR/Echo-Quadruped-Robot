@@ -152,6 +152,6 @@ void loop() {
   moveLeg(FLHip, FLKnee, phaseFL);
   moveLeg(BRHip, BRKnee, phaseBR);
 
-  // High frequency update for smoothness
+  // delay and repeat!!
   delay(10);
 }
