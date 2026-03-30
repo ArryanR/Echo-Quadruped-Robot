@@ -5,7 +5,7 @@ This is a quadruped robot that I developed when I introduced myself to engineeri
 I have yet to implement Computer Vision and a robotic arm, but I am currently trying to do so.
 
 Robot actuator for v4, still in  development:
-<img width="866" height="663" alt="image" src="https://github.com/user-attachments/assets/25b2fbcf-fab6-433d-b33b-48d81eaa8e6a" />
+<img width="968" height="789" alt="image" src="https://github.com/user-attachments/assets/5c0857a9-0bef-48e5-ae2b-13d03b85fe7d" />
 
 
 v3 - Largest Change
