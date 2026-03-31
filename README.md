@@ -5,7 +5,7 @@ This is a quadruped robot that I developed when I introduced myself to engineeri
 I have yet to implement Computer Vision and a robotic arm, but I am currently trying to do so.
 
 Robot actuator for v4, still in  development. This uses a planetary gearbox which changes motion at faster speeds and is cost and size effective. Using a harmonic gearbox would have not been good for this quadruped's needs, and I think that because I am not that much of an experienced engineer, using a cyclodial gearbox would have been too difficult to produce, but maybe I'll use it as I grow.
-<img width="724" height="600" alt="image" src="https://github.com/user-attachments/assets/2e6e4a5e-0f9f-417c-ab8b-994ac86d315a" />
+<img width="782" height="645" alt="image" src="https://github.com/user-attachments/assets/ea741574-f8b1-4c51-a149-bee721072017" />
 
 
 v3 - Largest Change from previous version, loss of a few degrees of freedom, but now size is more appropriate for a hobbyist build.
