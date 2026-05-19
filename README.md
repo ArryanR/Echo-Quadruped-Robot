@@ -1,6 +1,6 @@
 # Echo - Quadruped Robot
 
-This is a quadruped robot that I developed when I introduced myself to engineering at 11, aiming to specifically focus on the process of designing and programming. Currently, I am at v3, and am developing v4. By the time you are reading this, I'm 12. I'll probably get around to working on v4 once I print v3 and notice flaws.
+This is a quadruped robot that I developed when I introduced myself to engineering at 11, aiming to specifically focus on the process of designing and programming. Currently, I am at v3, and am developing v4. I'll probably get around to working on v4 once I print v3 and notice flaws.
 
 I have yet to implement Computer Vision and a robotic arm, but I am currently trying to do so.
 
