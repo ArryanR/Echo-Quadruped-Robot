@@ -12,7 +12,7 @@ const int HipCenter = 90;
 const int KneeCenter = 80;
 
 // Geometry setup
-const float L1 = 42.99923; // Upper leg length (this is really rounded)
+const float L1 = 42.99923; // Upper leg length (approximated)
 const float L2 = 92.54436; // Lower leg length
 
 // Gait parameters
