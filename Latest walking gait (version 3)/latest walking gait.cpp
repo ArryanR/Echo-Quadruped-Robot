@@ -12,8 +12,8 @@ const int HipCenter = 90;
 const int KneeCenter = 80;
 
 // Geometry setup
-const float L1 = 40; // Upper leg length (this is really rounded)
-const float L2 = 86; // Lower leg length
+const float L1 = 42.99923; // Upper leg length (this is really rounded)
+const float L2 = 92.54436; // Lower leg length
 
 // Gait parameters
 const unsigned long CycleTime = 2000; // Time for one full step cycle in ms
