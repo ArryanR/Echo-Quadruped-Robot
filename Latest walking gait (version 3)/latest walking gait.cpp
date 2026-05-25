@@ -19,7 +19,7 @@ const float L2 = 86; // Lower leg length
 const unsigned long CycleTime = 2000; // Time for one full step cycle in ms
 const float StepLength = 60.0;        // Horizontal travel
 const float StepLift = 40.0;          // Vertical lift height
-const float StandHeight = -320.0;     // Total neutral height (must be less than than L1+L2)
+const float StandHeight = 80.0;     // Total neutral height (must be less than than L1+L2)
 
 void legIK(float x, float z, float &hipDeg, float &kneeDeg) {
   // Distance from hip to foot
