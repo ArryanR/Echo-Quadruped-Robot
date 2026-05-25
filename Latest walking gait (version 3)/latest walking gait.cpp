@@ -7,28 +7,28 @@ Servo FLHip, FLKnee;
 Servo BRHip, BRKnee;
 Servo BLHip, BLKnee;
 
-// The center position for my servos (usually 90 degrees)
+// The center position for servos ( usually 90 degrees)
 const int HipCenter = 90;
 const int KneeCenter = 80;
 
 // Geometry setup
-const float L1 = 70; // Upper leg length
-const float L2 = 80; // Lower leg length
+const float L1 = 40; // Upper leg length (this is really rounded)
+const float L2 = 86; // Lower leg length
 
 // Gait parameters
 const unsigned long CycleTime = 2000; // Time for one full step cycle in ms
 const float StepLength = 60.0;        // Horizontal travel
 const float StepLift = 40.0;          // Vertical lift height
-const float StandHeight = -320.0;     // Total neutral height (must be < than L1+L2)
+const float StandHeight = -320.0;     // Total neutral height (must be less than than L1+L2)
 
 void legIK(float x, float z, float &hipDeg, float &kneeDeg) {
   // Distance from hip to foot
   float r = sqrt(x * x + z * z);
 
-  // Law of Cosines for the Knee Angle
+  // Law of Cosines for Knee Angle
   float cosKnee = (r * r - L1 * L1 - L2 * L2) / (2.0 * L1 * L2);
 
-  // Constrain to avoid math errors
+  // Constrained to avoid math errors
   cosKnee = constrain(cosKnee, -1.0, 1.0);
 
   float kneeRad = acos(cosKnee);
@@ -44,7 +44,7 @@ void legIK(float x, float z, float &hipDeg, float &kneeDeg) {
   hipDeg = hipRad * 180.0 / PI;
   kneeDeg = -kneeRad * 180.0 / PI;
   
-  // the minus tells the computer that it is inverse legs
+  // the minus tells the computer that it is inverse legs as 2 legs are coded together
 }
 
 // Calculates leg position based on gait phase (0.0 to 1.0)
@@ -52,7 +52,7 @@ void moveLeg(Servo &hip, Servo &knee, float phase, bool invertX = false) {
   float xHip, zHip;
   float xKnee, zKnee;
 
-  // --- HIP POSITION (Current Phase) ---
+  // Hip position
   if (phase < 0.5) {
     float p = phase / 0.5;
     xHip = StepLength * (0.5 - p);
@@ -63,7 +63,7 @@ void moveLeg(Servo &hip, Servo &knee, float phase, bool invertX = false) {
     zHip = StandHeight + StepLift * sin(PI * s);
   }
 
-  // --- KNEE POSITION (Phase offset by 20ms) ---
+  // Knee Position
   // 20ms / 2000ms = 0.01 phase shift
   float kneePhase = phase - 0.01; 
   if (kneePhase < 0) kneePhase += 1.0;
@@ -83,7 +83,7 @@ void moveLeg(Servo &hip, Servo &knee, float phase, bool invertX = false) {
     xKnee = -xKnee;
   }
 
-  float hipAngle, kneeAngle_trash;
+  float hipAngle, kneeAngle_trash; // trash angles are temporary but necessary but if I wanted to make this better then I'd definitely initialise functions better
   float hipAngle_trash, kneeAngle;
 
   // Calculate separate targets
@@ -105,7 +105,7 @@ void setup() {
   int initHipPos = constrain(HipCenter + (int)startHipAngle, 0, 180);
   int initKneePos = constrain(KneeCenter + (int)startKneeAngle, 0, 180);
 
-  // Write positions before attaching so they don't snap
+  // Write positions before attaching so they don't snap or jitter
   FRHip.write(initHipPos);
   FLHip.write(initHipPos);
   BRHip.write(initHipPos);
@@ -132,7 +132,7 @@ void setup() {
 }
 
 void loop() {
-  // Get global cycle time (0.0 to 1.0)
+  // Get global cycle time (0.0 to 1.0) note that this is coded in phases
   unsigned long currentTime = millis();
   float t = (float)(currentTime % CycleTime) / (float)CycleTime;
 
