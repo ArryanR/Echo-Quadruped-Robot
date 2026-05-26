@@ -36,3 +36,8 @@ Map to servo center:
 
 Foot moves forward and lifts (with sine wave):
 <code>z = StandHeight + StepLift · sin(π*s)</code>
+
+### PLEASE NOTE:
+- +X = forward
+- +Z = upward/downward
+- Origin = hip joint
