@@ -1,6 +1,6 @@
 # IK Derivations
 
-### Distance from knee to foot
+### Distance from hip to target foot distance
 Compute straight line distance and convert to triangle problem:
 <code> r = √(x^2 + z^2) </code>
 
@@ -8,7 +8,7 @@ Compute straight line distance and convert to triangle problem:
 Law of Cosines:
 <code> r^2 = L1^2 + L2^2 - 2 * L1 * L2 * cos(θ₂) </code>
 
-Rearrange for θ^2
+Rearrange for θ₂
 <code> cos(θ₂) = (r^2 - L1^2 - L2^2) / (2* L1 * L2) </code>
 
 So:
@@ -32,7 +32,7 @@ Map to servo center:
 
 ### Gait generation (i.e. how it moves)
 <code>x = StepLength * (0.5 - p)</code>
-<code> z = StandHeight I </code>
+<code> z = StandHeight </code>
 
 Foot moves forward and lifts (with sine wave):
 <code>z = StandHeight + StepLift · sin(π*s)</code>
