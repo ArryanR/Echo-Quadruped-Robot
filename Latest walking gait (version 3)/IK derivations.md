@@ -34,8 +34,8 @@ Map to servo center:
 <code>x = StepLength * (0.5 - p)</code>
 <code> z = StandHeight </code>
 
-Foot moves forward and lifts (with sine wave):
-<code>z = StandHeight + StepLift · sin(π*s)</code>
+Foot moves forward and lifts (with sine wave to make smooth):
+<code>z = StandHeight + StepLift * sin(π*s)</code>
 
 ### PLEASE NOTE:
 - +X = forward
