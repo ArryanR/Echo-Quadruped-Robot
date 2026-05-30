@@ -42,7 +42,7 @@ Foot moves forward and lifts (with sine wave):
 - +Z = upward/downward
 - Origin = hip joint
 
-<h5> Sources:</h5>  
+### Sources: 
 
 https://www.youtube.com/watch?v=WAsMAeKDc4U
 
